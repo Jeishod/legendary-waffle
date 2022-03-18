@@ -5,6 +5,7 @@ cmake-build-*/
 out/
 .DS_Store
 __pycache__/
+static/
 *.py[cod]
 *$py.class
 *.so
