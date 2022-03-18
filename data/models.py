@@ -22,7 +22,7 @@ class User(LifeCycleMixin):
         return self.email
 
     class Meta:
-        db_table = 'users'
+        db_table = "users"
 
 
 class Project(LifeCycleMixin):
@@ -34,7 +34,7 @@ class Project(LifeCycleMixin):
         return self.title
 
     class Meta:
-        db_table = 'projects'
+        db_table = "projects"
 
 
 class File(LifeCycleMixin):
@@ -47,4 +47,4 @@ class File(LifeCycleMixin):
         return self.title
 
     class Meta:
-        db_table = 'files'
+        db_table = "files"
