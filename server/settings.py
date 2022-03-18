@@ -11,6 +11,8 @@ PROJECT_NAME = os.environ.get("SERVER_NAME", "Server")
 SECRET_KEY = os.environ.get("SERVER_SECRET_KEY", "secretkey")
 DEBUG = os.environ.get("SERVER_DEBUG", False)
 ALLOWED_HOSTS = []
+PWD_ALGORITHM = os.environ.get("SERVER_PWD_ALGORITHM", "SHA256")
+EXPIRE_TOKEN = int(os.environ.get("SERVER_EXPIRE_TOKEN", 20160))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
