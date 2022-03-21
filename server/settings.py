@@ -9,8 +9,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_NAME = os.environ.get("SERVER_NAME", "Server")
 SECRET_KEY = os.environ.get("SERVER_SECRET_KEY", "secretkey")
-DEBUG = os.environ.get("SERVER_DEBUG", False)
+DEBUG = (os.environ.get("SERVER_DEBUG", False).lower() == "true")
 ALLOWED_HOSTS = []
+PWD_ALGORITHM = os.environ.get("SERVER_PWD_ALGORITHM", "SHA256")
+EXPIRE_TOKEN = int(os.environ.get("SERVER_EXPIRE_TOKEN", 20160))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -95,4 +97,7 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_URL = "static/"
-STATIC_ROOT = os.environ.get("SERVER_STATIC_ROOT", "static")
+STATIC_ROOT = BASE_DIR / "static"
+
+MEDIA_URL = "uploads/"
+MEDIA_ROOT = BASE_DIR / "uploads"
