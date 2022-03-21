@@ -11,7 +11,7 @@ from data.models import User
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v0/auth/login")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -38,7 +38,10 @@ def decode_access_token(token: str) -> Dict[str, Any]:
 
 
 def authenticate(email: EmailStr, password: str) -> Optional[User]:
-    db_user = await User.objects.get(email=email)
-    if not db_user or not verify_password(plain_password=password, hashed_password=db_user.hashed_password):
+    try:
+        db_user = User.objects.get(email=email)
+        if not verify_password(plain_password=password, hashed_password=db_user.hashed_password):
+            return None
+        return db_user
+    except User.DoesNotExist:
         return None
-    return db_user
