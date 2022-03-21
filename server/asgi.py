@@ -15,7 +15,7 @@ from api.router import api_router
 
 
 def get_application() -> FastAPI:
-    main_app = FastAPI(title=settings.PROJECT_NAME, debug=settings.DEBUG, docs_url="/api/v0/docs")
+    main_app = FastAPI(title=settings.PROJECT_NAME, debug=settings.DEBUG, docs_url="/api")
     main_app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.ALLOWED_HOSTS or ["*"],
@@ -23,7 +23,11 @@ def get_application() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    # mount API
     main_app.include_router(api_router, prefix="/api")
+
+    # mount Django
     main_app.mount("", WSGIMiddleware(get_wsgi_application()))
 
     return main_app
