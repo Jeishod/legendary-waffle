@@ -1,4 +1,1 @@
-# My personal best practices
-
----
-
+# Django & FastAPI
